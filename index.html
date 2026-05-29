@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taste of Gold Coast – Coventry, 27 June 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600;1,700&family=Cinzel:wght@400;600;700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
+:root {
+  --ink:        #0E0904;
+  --gold:       #B8860B;
+  --gold-lt:    #D4A017;
+  --gold-bright:#F0C040;
+  --gold-pale:  #F9EFD0;
+  --red:        #9B2C1A;
+  --red-lt:     #C23B22;
+  --green:      #1F4D39;
+  --green-lt:   #2D6A4F;
+  --cream:      #F5EDD8;
+  --cream-dark: #EDE0C0;
+  --dark:       #120C04;
+  --dark2:      #1C1208;
+  --dark3:      #241808;
+  --muted:      #6B5A3A;
+  --muted-lt:   #9A7D52;
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-title:   'Cinzel', serif;
+  --ff-body:    'Jost', sans-serif;
+}
+
+/* ─────────────────────────────────────────
+   RESET
+───────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:var(--ff-body); background:var(--cream); color:var(--ink); overflow-x:hidden; }
+img  { display:block; max-width:100%; }
+a    { text-decoration:none; color:inherit; }
+
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--dark); }
+::-webkit-scrollbar-thumb { background:var(--gold); }
+
+/* ─────────────────────────────────────────
+   UTILITY
+───────────────────────────────────────── */
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+/* ─────────────────────────────────────────
+   KENTE STRIP (reusable)
+───────────────────────────────────────── */
+.kente {
+  height:14px; flex-shrink:0;
+  background: repeating-linear-gradient(90deg,
+    var(--red)       0px,  var(--red)       56px,
+    var(--gold-lt)   56px, var(--gold-lt)  112px,
+    var(--green)     112px,var(--green)    168px,
+    var(--ink)       168px,var(--ink)      224px,
+    var(--gold-bright)224px,var(--gold-bright)280px,
+    var(--red)       280px,var(--red)      336px,
+    var(--green-lt)  336px,var(--green-lt) 392px,
+    var(--gold)      392px,var(--gold)     448px
+  );
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 3rem;
+  height:64px;
+  transition:background .4s, backdrop-filter .4s, border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.solid {
+  background:rgba(18,12,4,.94);
+  backdrop-filter:blur(14px);
+  border-color:rgba(184,134,11,.2);
+}
+.nav-brand {
+  font-family:var(--ff-title);
+  font-size:.9rem; letter-spacing:.18em;
+  color:var(--gold-bright);
+}
+.nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; }
+.nav-links a {
+  font-family:var(--ff-body); font-size:.72rem; font-weight:400;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:rgba(255,255,255,.5); transition:color .25s;
+}
+.nav-links a:hover { color:var(--gold-bright); }
+.nav-cta {
+  font-family:var(--ff-title); font-size:.78rem; letter-spacing:.14em;
+  background:var(--gold); color:var(--ink) !important;
+  padding:.38rem 1.4rem; font-weight:600;
+  transition:background .2s !important;
+}
+.nav-cta:hover { background:var(--gold-bright) !important; }
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  position:relative; min-height:100vh;
+  background:var(--dark);
+  display:grid; place-items:center;
+  overflow:hidden; padding:5rem 2rem 5rem;
+}
+
+/* Layered background: diagonal kente weave */
+.hero-bg {
+  position:absolute; inset:0; z-index:0;
+  background-image:
+    repeating-linear-gradient(
+      60deg,
+      rgba(184,134,11,.055) 0, rgba(184,134,11,.055) 1px,
+      transparent 1px, transparent 32px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      rgba(155,44,26,.04) 0, rgba(155,44,26,.04) 1px,
+      transparent 1px, transparent 32px
+    );
+}
+
+/* Ghana flag stripe top */
+.hero-flag-top {
+  position:absolute; top:0; left:0; right:0; height:14px; z-index:1;
+  background:linear-gradient(90deg,
+    var(--red) 33.33%, var(--gold-lt) 33.33%,
+    var(--gold-lt) 66.66%, var(--green) 66.66%);
+}
+/* Kente just below flag */
+.hero-kente-top {
+  position:absolute; top:14px; left:0; right:0; z-index:1;
+}
+
+.hero-flag-bot { display:none; }
+.hero-kente-bot { display:none; }
+
+/* Warm elliptical glow */
+.hero-glow {
+  position:absolute; z-index:0;
+  top:50%; left:50%; transform:translate(-50%,-54%);
+  width:900px; height:560px; border-radius:50%;
+  background:radial-gradient(ellipse, rgba(184,134,11,.1) 0%, transparent 68%);
+}
+
+/* Inset decorative border */
+.hero-frame {
+  position:absolute; inset:32px; z-index:1;
+  border:1px solid rgba(184,134,11,.14);
+  pointer-events:none;
+}
+
+/* Hero content */
+.hero-content {
+  position:relative; z-index:2;
+  text-align:center; max-width:900px;
+}
+
+.hero-eyebrow {
+  font-family:var(--ff-body); font-size:.72rem; font-weight:300;
+  letter-spacing:.55em; text-transform:uppercase;
+  color:rgba(240,192,64,.7); margin-bottom:2rem;
+  opacity:0; animation:fadeUp .8s ease .2s forwards;
+}
+
+.hero-rule {
+  display:flex; align-items:center; justify-content:center;
+  gap:1.2rem; margin-bottom:2rem;
+  opacity:0; animation:fadeUp .8s ease .35s forwards;
+}
+.hero-rule-line {
+  flex:1; max-width:140px; height:1px;
+  background:linear-gradient(to right, transparent, rgba(184,134,11,.5));
+}
+.hero-rule-line.r {
+  background:linear-gradient(to left, transparent, rgba(184,134,11,.5));
+}
+.hero-rule-star { color:var(--gold); font-size:1rem; }
+
+.hero-title-of {
+  font-family:var(--ff-title);
+  font-size:clamp(3rem, 8vw, 7rem);
+  font-weight:400; letter-spacing:.18em;
+  color:#fff; line-height:1;
+  margin-bottom:.3rem;
+  opacity:0; animation:fadeUp .9s ease .5s forwards;
+}
+
+.hero-title-gc {
+  font-family:var(--ff-display);
+  font-size:clamp(4.5rem, 13vw, 11rem);
+  font-weight:700; font-style:italic;
+  color:var(--gold-bright); letter-spacing:-.02em;
+  line-height:.9; margin-bottom:2rem;
+  opacity:0; animation:fadeUp .9s ease .65s forwards;
+}
+
+.hero-tagline {
+  font-family:var(--ff-body); font-weight:200;
+  font-size:clamp(.9rem, 2vw, 1.15rem);
+  letter-spacing:.4em; text-transform:uppercase;
+  color:rgba(255,255,255,.45); margin-bottom:3rem;
+  opacity:0; animation:fadeUp .9s ease .8s forwards;
+}
+
+/* Event meta pills */
+.hero-meta {
+  display:flex; justify-content:center; flex-wrap:wrap; gap:0;
+  border:1px solid rgba(184,134,11,.25);
+  margin-bottom:2.8rem;
+  opacity:0; animation:fadeUp .9s ease .95s forwards;
+}
+.hero-meta-cell {
+  padding:1.1rem 2.4rem; text-align:center;
+  border-right:1px solid rgba(184,134,11,.18);
+}
+.hero-meta-cell:last-child { border-right:none; }
+.meta-label {
+  display:block; font-family:var(--ff-title);
+  font-size:.58rem; letter-spacing:.3em;
+  color:var(--gold); margin-bottom:.5rem;
+}
+.meta-value {
+  font-family:var(--ff-body); font-size:.95rem; font-weight:400;
+  color:#fff; white-space:nowrap;
+}
+
+/* CTAs */
+.hero-ctas {
+  display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap;
+  opacity:0; animation:fadeUp .9s ease 1.1s forwards;
+}
+.btn {
+  display:inline-block; font-family:var(--ff-title);
+  font-size:.82rem; letter-spacing:.2em;
+  padding:1rem 3rem; cursor:pointer; border:none;
+  transition:all .2s;
+}
+.btn:hover { transform:translateY(-2px); }
+.btn-gold { background:var(--gold); color:var(--ink); }
+.btn-gold:hover { background:var(--gold-bright); }
+.btn-ghost {
+  background:transparent; color:var(--gold-bright);
+  border:1px solid rgba(184,134,11,.5);
+}
+.btn-ghost:hover { border-color:var(--gold-bright); background:rgba(184,134,11,.08); }
+
+/* Scroll cue */
+.scroll-cue {
+  position:absolute; bottom:3rem; left:50%; transform:translateX(-50%);
+  z-index:2; display:flex; flex-direction:column; align-items:center; gap:.6rem;
+  opacity:0; animation:fadeUp .9s ease 1.4s forwards;
+}
+.scroll-cue span {
+  font-family:var(--ff-body); font-size:.6rem; letter-spacing:.3em;
+  color:rgba(255,255,255,.22); text-transform:uppercase;
+}
+.scroll-line {
+  width:1px; height:56px;
+  background:linear-gradient(to bottom, rgba(184,134,11,.6), transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────
+   ABOUT
+───────────────────────────────────────── */
+.about { background:var(--cream); padding:8rem 2rem; }
+.about-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center;
+}
+.tag {
+  font-family:var(--ff-title); font-size:.65rem; letter-spacing:.4em;
+  color:var(--gold); display:block; margin-bottom:1.2rem;
+}
+.section-title {
+  font-family:var(--ff-display);
+  font-size:clamp(2rem, 4.5vw, 3.4rem);
+  font-weight:600; line-height:1.08; color:var(--ink);
+  margin-bottom:1.6rem;
+}
+.section-title em { color:var(--red); font-style:italic; }
+
+.about-text p {
+  font-family:var(--ff-body); font-size:1rem; font-weight:300;
+  line-height:1.9; color:var(--muted); margin-bottom:1.2rem;
+}
+.about-text strong { color:var(--ink); font-weight:500; }
+
+/* Pillars grid */
+.pillars { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+.pillar {
+  background:#fff; padding:1.6rem 1.4rem;
+  border:1px solid rgba(184,134,11,.16);
+  position:relative; overflow:hidden;
+  transition:border-color .25s, transform .25s;
+}
+.pillar:hover { border-color:var(--gold); transform:translateY(-3px); }
+.pillar::before {
+  content:''; position:absolute;
+  top:0; left:0; width:3px; height:100%;
+  background:linear-gradient(to bottom, var(--gold), var(--red));
+}
+.pillar-icon { font-size:2rem; margin-bottom:.7rem; }
+.pillar-name {
+  font-family:var(--ff-display); font-size:1.1rem;
+  font-weight:600; color:var(--ink); margin-bottom:.35rem;
+}
+.pillar-body { font-family:var(--ff-body); font-size:.88rem; font-weight:300; color:var(--muted); line-height:1.65; }
+
+/* ─────────────────────────────────────────
+   MENU SECTION
+───────────────────────────────────────── */
+.menu-section {
+  background:var(--dark2);
+  padding:8rem 2rem; position:relative; overflow:hidden;
+}
+.menu-section::before {
+  content:''; position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,
+      rgba(184,134,11,.035) 0, rgba(184,134,11,.035) 1px,
+      transparent 1px, transparent 64px),
+    repeating-linear-gradient(0deg,
+      rgba(184,134,11,.025) 0, rgba(184,134,11,.025) 1px,
+      transparent 1px, transparent 64px);
+}
+.menu-inner { max-width:1100px; margin:0 auto; position:relative; }
+.menu-section .tag  { color:rgba(240,192,64,.6); }
+.menu-section .section-title { color:#fff; }
+
+.menu-note {
+  font-family:var(--ff-body); font-size:.95rem; font-weight:500;
+  color:#fff;
+  background:rgba(155,44,26,.45);
+  border:1px solid rgba(194,59,34,.5);
+  border-left:3px solid var(--red-lt);
+  padding:.75rem 1.1rem;
+  margin-bottom:3rem;
+  display:inline-block;
+}
+
+/* Tab bar */
+.tabs { display:flex; border-bottom:1px solid rgba(184,134,11,.18); margin-bottom:2.8rem; }
+.tab-btn {
+  font-family:var(--ff-title); font-size:.75rem; letter-spacing:.2em;
+  color:rgba(255,255,255,.3); padding:.75rem 1.8rem;
+  background:none; border:none; border-bottom:2px solid transparent;
+  cursor:pointer; transition:color .2s, border-color .2s;
+}
+.tab-btn.on { color:var(--gold-bright); border-bottom-color:var(--gold); }
+.tab-btn:hover:not(.on) { color:rgba(255,255,255,.6); }
+
+.tab-panel { display:none; }
+.tab-panel.on { display:block; }
+
+/* Menu cards grid */
+.menu-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
+  gap:1.2rem;
+}
+.menu-card {
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(184,134,11,.12);
+  padding:1.5rem;
+  transition:background .2s, border-color .2s;
+}
+.menu-card:hover {
+  background:rgba(255,255,255,.065);
+  border-color:rgba(184,134,11,.35);
+}
+.menu-card-top {
+  margin-bottom:.5rem;
+}
+.menu-card-name {
+  font-family:var(--ff-display); font-size:1.2rem;
+  font-weight:600; color:#fff; line-height:1.2;
+}
+.menu-card-desc {
+  font-family:var(--ff-body); font-size:.85rem; font-weight:300;
+  color:rgba(255,255,255,.38); line-height:1.7;
+}
+.menu-card-tag {
+  display:inline-block; margin-top:.75rem;
+  font-family:var(--ff-title); font-size:.6rem; letter-spacing:.14em;
+  padding:.18rem .7rem;
+  background:rgba(184,134,11,.12); color:var(--gold-bright);
+}
+
+/* Option groups (protein / soup selectors) */
+.option-group { display:flex; flex-direction:column; gap:.45rem; }
+.option-label {
+  font-family:var(--ff-title); font-size:.62rem; letter-spacing:.18em;
+  color:var(--gold); text-transform:uppercase;
+  display:flex; align-items:center; gap:.5rem;
+}
+.option-pick {
+  font-family:var(--ff-body); font-size:.65rem; font-weight:600;
+  color:var(--red-lt); letter-spacing:.04em;
+  text-transform:none;
+}
+.option-pills { display:flex; flex-wrap:wrap; gap:.4rem; }
+.pill {
+  font-family:var(--ff-body); font-size:.76rem; font-weight:400;
+  color:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(184,134,11,.22);
+  padding:.22rem .65rem;
+  white-space:nowrap;
+  transition:background .2s, border-color .2s;
+}
+.pill:hover { background:rgba(184,134,11,.14); border-color:rgba(184,134,11,.5); }
+
+/* Credit callout */
+.credit-callout {
+  margin-top:2.8rem;
+  border:1px solid rgba(184,134,11,.2);
+  padding:1.6rem 2rem;
+  display:flex; gap:1.4rem; align-items:flex-start;
+  background:rgba(184,134,11,.04);
+}
+.credit-icon { font-size:2rem; flex-shrink:0; line-height:1; }
+.credit-title {
+  font-family:var(--ff-display); font-size:1rem;
+  font-weight:600; color:var(--gold-bright); margin-bottom:.4rem;
+}
+.credit-body {
+  font-family:var(--ff-body); font-size:.86rem; font-weight:300;
+  color:rgba(255,255,255,.4); line-height:1.7;
+}
+
+/* ─────────────────────────────────────────
+   RSVP
+───────────────────────────────────────── */
+.rsvp-section {
+  background:var(--cream-dark); padding:8rem 2rem;
+  position:relative;
+}
+.rsvp-section::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,
+    var(--red) 33.33%, var(--gold) 33.33%,
+    var(--gold) 66.66%, var(--green) 66.66%);
+}
+.rsvp-inner { max-width:740px; margin:0 auto; }
+.rsvp-card {
+  background:#fff;
+  border:1px solid rgba(184,134,11,.22);
+  padding:3.5rem; position:relative;
+}
+.rsvp-card::after {
+  content:''; position:absolute; inset:8px;
+  border:1px solid rgba(184,134,11,.07);
+  pointer-events:none;
+}
+
+.ticket-note {
+  display:flex; align-items:center; gap:.6rem;
+  background:var(--gold-pale); border:1px solid rgba(184,134,11,.3);
+  padding:.55rem 1.2rem; margin-bottom:2.2rem;
+  font-family:var(--ff-body); font-size:.84rem; font-weight:400;
+  color:var(--red);
+}
+.ticket-note strong { font-weight:600; }
+
+/* Form */
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-bottom:1.1rem; }
+.fg { display:flex; flex-direction:column; gap:.4rem; }
+.fg.full { grid-column:1/-1; }
+.fg label {
+  font-family:var(--ff-title); font-size:.62rem; letter-spacing:.18em;
+  color:var(--muted); text-transform:uppercase;
+}
+.fg input, .fg select {
+  border:1px solid rgba(0,0,0,.14); padding:.78rem 1rem;
+  font-family:var(--ff-body); font-size:.94rem; font-weight:300;
+  color:var(--ink); background:var(--cream); outline:none;
+  transition:border-color .2s; -webkit-appearance:none;
+  border-radius:0;
+}
+.fg input:focus, .fg select:focus { border-color:var(--gold); }
+
+.pay-block {
+  background:var(--gold-pale); border:1px solid rgba(184,134,11,.28);
+  padding:1.5rem 1.6rem; margin:2rem 0;
+  display:flex; justify-content:space-between; align-items:center;
+  gap:1rem; flex-wrap:wrap;
+}
+.pay-block-text h4 {
+  font-family:var(--ff-display); font-size:1.05rem; font-weight:600;
+  color:var(--ink); margin-bottom:.25rem;
+}
+.pay-block-text p { font-family:var(--ff-body); font-size:.82rem; font-weight:300; color:var(--muted); line-height:1.6; }
+.pay-amount {
+  font-family:var(--ff-display); font-size:2.8rem; font-weight:700;
+  color:var(--red); line-height:1; white-space:nowrap;
+}
+.pay-amount sub { font-size:1rem; color:var(--muted); }
+
+.btn-submit {
+  width:100%; background:var(--red); color:#fff;
+  font-family:var(--ff-title); font-size:1rem; letter-spacing:.22em;
+  padding:1.1rem; border:none; cursor:pointer;
+  transition:background .2s, transform .15s;
+}
+.btn-submit:hover { background:var(--red-lt); transform:translateY(-1px); }
+
+.secure-note {
+  display:flex; align-items:center; justify-content:center;
+  gap:.5rem; margin-top:.9rem;
+  font-family:var(--ff-body); font-size:.76rem; font-weight:300; color:var(--muted-lt);
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer {
+  background:var(--dark); padding:3.5rem 2rem;
+  text-align:center; position:relative;
+}
+footer::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,
+    var(--red) 33.33%, var(--gold) 33.33%,
+    var(--gold) 66.66%, var(--green) 66.66%);
+}
+.footer-brand {
+  font-family:var(--ff-display); font-size:2rem;
+  font-weight:600; font-style:italic; color:var(--gold-bright);
+  margin-bottom:.5rem;
+}
+footer p { font-family:var(--ff-body); font-size:.82rem; font-weight:300; color:rgba(255,255,255,.3); }
+footer a { color:var(--gold); transition:color .2s; }
+footer a:hover { color:var(--gold-bright); }
+
+/* ─────────────────────────────────────────
+   MODAL
+───────────────────────────────────────── */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:400;
+  background:rgba(18,12,4,.9); align-items:center; justify-content:center; padding:1.5rem;
+}
+.modal-overlay.open { display:flex; }
+.modal-box {
+  background:var(--cream); max-width:480px; width:100%;
+  padding:3rem; position:relative; text-align:center;
+  animation:fadeUp .3s ease;
+}
+.modal-close {
+  position:absolute; top:1rem; right:1.2rem;
+  background:none; border:none; font-size:1.4rem;
+  cursor:pointer; color:var(--muted-lt); line-height:1;
+}
+.modal-icon { font-size:3rem; margin-bottom:1rem; }
+.modal-title {
+  font-family:var(--ff-display); font-size:2rem;
+  font-weight:600; color:var(--green); margin-bottom:.7rem;
+}
+.modal-body { font-family:var(--ff-body); font-size:.94rem; font-weight:300; color:var(--muted); line-height:1.75; }
+
+/* ─────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes scrollPulse {
+  0%,100% { opacity:.2; }
+  50%      { opacity:.8; }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width:768px) {
+  nav { padding:0 1.5rem; }
+  .nav-links { display:none; }
+  .about-inner { grid-template-columns:1fr; gap:3.5rem; }
+  .pillars { grid-template-columns:1fr; }
+  .form-grid { grid-template-columns:1fr; }
+  .hero-meta { flex-direction:column; gap:0; }
+  .hero-meta-cell { border-right:none; border-bottom:1px solid rgba(184,134,11,.15); }
+  .hero-ctas { flex-direction:column; align-items:center; }
+  .pay-block { flex-direction:column; }
+  .rsvp-card { padding:2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <div class="nav-brand">Taste of Gold Coast</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#rsvp" class="nav-cta">RSVP — £2.50</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-flag-top"></div>
+  <div class="hero-kente-top kente"></div>
+  <div class="hero-frame"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">An Evening of Ghanaian Food, Music &amp; Culture</p>
+
+    <div class="hero-rule">
+      <div class="hero-rule-line"></div>
+      <span class="hero-rule-star">★</span>
+      <span class="hero-rule-star">★</span>
+      <span class="hero-rule-star">★</span>
+      <div class="hero-rule-line r"></div>
+    </div>
+
+    <div class="hero-title-of">TASTE OF</div>
+    <div class="hero-title-gc">Gold Coast</div>
+
+    <p class="hero-tagline">Food &nbsp;&middot;&nbsp; Music &nbsp;&middot;&nbsp; Games &nbsp;&middot;&nbsp; Community</p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-cell">
+        <span class="meta-label">Date</span>
+        <span class="meta-value">Saturday, 27 June 2026</span>
+      </div>
+      <div class="hero-meta-cell">
+        <span class="meta-label">Time</span>
+        <span class="meta-value">2:00 PM – 10:00 PM</span>
+      </div>
+      <div class="hero-meta-cell">
+        <span class="meta-label">Venue</span>
+        <span class="meta-value">14 Delage Close, CV6 6JP</span>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="https://buy.stripe.com/28EfZh682bc05AYg0q4sE00" target="_blank" class="btn btn-gold">Reserve Your Spot — £2.50</a>
+      <a href="#menu" class="btn btn-ghost">View Menu</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+
+  <div class="hero-kente-bot kente"></div>
+  <div class="hero-flag-bot"></div>
+</section>
+
+<!-- ─── KENTE DIVIDER ─── -->
+<div class="kente"></div>
+
+<!-- ─── ABOUT ─── -->
+<section class="about" id="about">
+  <div class="about-inner">
+
+    <div class="about-text">
+      <span class="tag">Our Story</span>
+      <h2 class="section-title">A Feast Rooted<br>in <em>Tradition</em></h2>
+      <p>Ghana — once known as the <strong>Gold Coast</strong> — is a land rich in flavour, rhythm, and warmth. This event brings that spirit right here to Coventry.</p>
+      <p>Expect <strong>authentic Ghanaian dishes</strong> made with love, highlife and Afrobeats filling the air, and games that bring everyone together. Whether you're Ghanaian by birth or by heart, you're welcome at this table.</p>
+      <p>Your £2.50 entry fee goes straight to your <strong>first drink or snack</strong> — so you arrive, relax, and get stuck in immediately.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🍲</div>
+        <div class="pillar-name">Authentic Food</div>
+        <p class="pillar-body">Traditional Ghanaian dishes prepared fresh on the day.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🎵</div>
+        <div class="pillar-name">Live Music</div>
+        <p class="pillar-body">Highlife, Afrobeats and good vibes all evening.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🎮</div>
+        <div class="pillar-name">Games &amp; Fun</div>
+        <p class="pillar-body">Traditional Ghanaian games for all ages.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤝</div>
+        <div class="pillar-name">Community</div>
+        <p class="pillar-body">A celebration open to everyone who loves great culture.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── KENTE DIVIDER ─── -->
+<div class="kente"></div>
+
+<!-- ─── MENU ─── -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <span class="tag">What's on the Table</span>
+    <h2 class="section-title">The Menu</h2>
+    <p class="menu-note">All meals are purchased separately on the day. Your £2.50 RSVP covers your first drink or snack.</p>
+
+    <div class="tabs">
+      <button class="tab-btn on" data-tab="mains">Main Dishes</button>
+      <button class="tab-btn" data-tab="snacks">Snacks</button>
+      <button class="tab-btn" data-tab="drinks">Drinks</button>
+    </div>
+
+    <!-- MAINS -->
+    <div class="tab-panel on" id="tab-mains">
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="margin-bottom:.9rem;">Jollof &amp; Salad</div>
+          <div class="option-group">
+            <div class="option-label">Protein Options <span class="option-pick">pick 1</span></div>
+            <div class="option-pills">
+              <span class="pill">Goat Meat</span>
+              <span class="pill">Assorted Meat</span>
+              <span class="pill">Tilapia</span>
+            </div>
+          </div>
+          <span class="menu-card-tag" style="margin-top:.9rem;">⭐ Signature</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="margin-bottom:.9rem;">Waakye, Salad &amp; Macaroni</div>
+          <div class="option-group">
+            <div class="option-label">Protein Options <span class="option-pick">pick 1</span></div>
+            <div class="option-pills">
+              <span class="pill">Fish</span>
+              <span class="pill">Assorted Meat</span>
+            </div>
+          </div>
+          <span class="menu-card-tag" style="margin-top:.9rem;">⭐ Signature</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="margin-bottom:.9rem;">Banku &amp; Pepper / Okro Soup</div>
+          <div class="option-group">
+            <div class="option-label">Protein Options <span class="option-pick">pick 1</span></div>
+            <div class="option-pills">
+              <span class="pill">Red Fish</span>
+              <span class="pill">Assorted Meat</span>
+              <span class="pill">Tilapia</span>
+            </div>
+          </div>
+          <span class="menu-card-tag" style="margin-top:.9rem;">Classic</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="margin-bottom:.9rem;">Fufu / Kokonte &amp; Soup</div>
+          <div class="option-group">
+            <div class="option-label">Soup <span class="option-pick">pick 1</span></div>
+            <div class="option-pills">
+              <span class="pill">Goat Meat Soup</span>
+              <span class="pill">Groundnut Soup</span>
+              <span class="pill">Palmnut Soup</span>
+              <span class="pill">Ebunebune Soup</span>
+              <span class="pill">Dried Fish Soup</span>
+            </div>
+          </div>
+          <div class="option-group" style="margin-top:.75rem;">
+            <div class="option-label">Protein Options <span class="option-pick">pick 3</span></div>
+            <div class="option-pills">
+              <span class="pill">Goat Meat</span>
+              <span class="pill">Beef</span>
+              <span class="pill">Cow Foot</span>
+              <span class="pill">Mushrooms</span>
+              <span class="pill">Smoked Mackerel</span>
+              <span class="pill">Dried Fish</span>
+              <span class="pill">Yemuadee</span>
+            </div>
+          </div>
+          <span class="menu-card-tag" style="margin-top:.9rem;">Traditional</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="margin-bottom:.9rem;">Fried Yam &amp; Sauce</div>
+          <div class="option-group">
+            <div class="option-label">Protein Options <span class="option-pick">pick 1</span></div>
+            <div class="option-pills">
+              <span class="pill">Gizzard</span>
+              <span class="pill">Red Fish</span>
+              <span class="pill">Tsoofi</span>
+              <span class="pill">Tilapia</span>
+              <span class="pill">Meat</span>
+              <span class="pill">Fish</span>
+            </div>
+          </div>
+          <span class="menu-card-tag" style="margin-top:.9rem;">Street Favourite</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="margin-bottom:.9rem;">Tuo Zaafi &amp; Ayoyo / Tomato Sauce</div>
+          <div class="option-group">
+            <div class="option-label">Protein Options</div>
+            <div class="option-pills">
+              <span class="pill">Fresh Mackerel</span>
+              <span class="pill">Wele</span>
+              <span class="pill">Beef</span>
+              <span class="pill">Yemuadee</span>
+            </div>
+          </div>
+          <span class="menu-card-tag" style="margin-top:.9rem;">Northern Ghana</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SNACKS -->
+    <div class="tab-panel" id="tab-snacks">
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Kelewele</div>
+          </div>
+          <p class="menu-card-desc">Spicy fried plantain cubes seasoned with ginger, chilli and aromatic spices. A beloved Ghanaian street snack.</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Spring Rolls</div>
+          </div>
+          <p class="menu-card-desc">Crispy golden rolls packed with a savoury filling — the perfect finger food to enjoy between music and games.</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Meat Pie</div>
+          </div>
+          <p class="menu-card-desc">Flaky, golden-baked pastry filled with a well-seasoned meat mixture. A West African party essential.</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Coated Groundnut</div>
+          </div>
+          <p class="menu-card-desc">Crunchy peanuts coated in a light, crispy shell. Great for snacking throughout the evening.</p>
+          <span class="menu-card-tag">🌿 Vegan</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Egg &amp; Pepper Sauce</div>
+          </div>
+          <p class="menu-card-desc">Boiled eggs served with a vibrant, spicy Ghanaian pepper sauce — a simple and delicious classic.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="tab-panel" id="tab-drinks">
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Sobolo</div>
+          </div>
+          <p class="menu-card-desc">Chilled hibiscus flower drink infused with ginger and spices. Refreshing and deeply Ghanaian.</p>
+          <span class="menu-card-tag">🌿 Non-alcoholic</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Asana</div>
+          </div>
+          <p class="menu-card-desc">A traditional Ghanaian fermented corn drink — lightly sweet, earthy and wonderfully unique.</p>
+          <span class="menu-card-tag">🌿 Non-alcoholic</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Amudoro</div>
+          </div>
+          <p class="menu-card-desc">A rich, sweet local drink made from fermented grains — warming and full of character.</p>
+          <span class="menu-card-tag">🌿 Non-alcoholic</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Malt</div>
+          </div>
+          <p class="menu-card-desc">The classic West African malt beverage — rich, sweet and nostalgic for anyone who grew up in Ghana.</p>
+          <span class="menu-card-tag">Non-alcoholic</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Beer &amp; Guinness</div>
+          </div>
+          <p class="menu-card-desc">Cold lager and the iconic Guinness Foreign Extra Stout — robust, smooth and perfectly paired with spicy Ghanaian food.</p>
+          <span class="menu-card-tag">🍺 Alcoholic</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Apeteshie</div>
+          </div>
+          <p class="menu-card-desc">Ghana's traditional palm wine spirit — potent, fiery and not for the faint-hearted. A true cultural experience.</p>
+          <span class="menu-card-tag">🔥 Alcoholic</span>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-top">
+            <div class="menu-card-name">Spirits, Gin &amp; Whiskey</div>
+          </div>
+          <p class="menu-card-desc">A selection of premium spirits to suit every taste — available throughout the evening.</p>
+          <span class="menu-card-tag">🍸 Alcoholic</span>
+        </div>
+
+      </div>
+
+      <div class="credit-callout">
+        <div class="credit-icon">🎟️</div>
+        <div>
+          <div class="credit-title">Your £2.50 RSVP Credit</div>
+          <p class="credit-body">Your entry fee counts as £2.50 credit towards any drink or snack on arrival. Tell our team when you arrive and we'll note it against your name. All additional drinks and meals are purchased on the day.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── KENTE DIVIDER ─── -->
+<div class="kente"></div>
+
+<!-- ─── RSVP ─── -->
+<section class="rsvp-section" id="rsvp">
+  <div class="rsvp-inner">
+    <span class="tag" style="color:var(--gold);">Secure Your Place</span>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">RSVP &amp; Reserve<br>Your <em>Spot</em></h2>
+
+    <div class="rsvp-card">
+      <div class="ticket-note">
+        🎟️&nbsp; Your £2.50 entry counts as <strong>&nbsp;£2.50 credit&nbsp;</strong> towards your first drink or snack
+      </div>
+
+      <form id="rsvpForm" onsubmit="handleRSVP(event)">
+        <div class="form-grid">
+          <div class="fg">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="Ama" required>
+          </div>
+          <div class="fg">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Owusu" required>
+          </div>
+          <div class="fg full">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="ama@example.com" required>
+          </div>
+          <div class="fg">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+44 7700 000000">
+          </div>
+          <div class="fg">
+            <label for="guests">Number of Guests</label>
+            <select id="guests" onchange="updateTotal()">
+              <option value="1">Just me (1)</option>
+              <option value="2">2 guests</option>
+              <option value="3">3 guests</option>
+              <option value="4">4 guests</option>
+              <option value="5">5 guests</option>
+              <option value="6">6 guests</option>
+              <option value="7">7 guests</option>
+              <option value="8">8 guests</option>
+              <option value="9">9 guests</option>
+              <option value="10">10 guests</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label for="dietary">Dietary Requirements (optional)</label>
+            <input type="text" id="dietary" placeholder="e.g. vegetarian, no pork, nut allergy…">
+          </div>
+        </div>
+
+        <div class="pay-block">
+          <div class="pay-block-text">
+            <h4>Entry &amp; Drink/Snack Credit</h4>
+            <p>£2.50 per person — credited to your first drink or snack on the day. Not an extra charge.</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:var(--ff-body);font-size:.78rem;font-weight:300;color:var(--muted);margin-bottom:.2rem;" id="guests-summary">1 guest × £2.50</div>
+            <div class="pay-amount" id="pay-total">£2.50</div>
+          </div>
+        </div>
+
+        <a id="stripe-btn" href="#" onclick="handleRSVP(event)" class="btn-submit" style="display:block;text-align:center;text-decoration:none;">Reserve My Spot &amp; Pay <span id="btn-total">£2.50</span> →</a>
+        <p class="secure-note">🔒 Secure payment &nbsp;·&nbsp; Confirmation sent by email</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-brand">Taste of Gold Coast</div>
+  <p style="margin:.5rem 0 .3rem;">14 Delage Close, CV6 6JP &nbsp;·&nbsp; Coventry &nbsp;·&nbsp; 27 June 2026</p>
+  <p style="margin-top:1rem;">Questions? <a href="mailto:hello@tasteofgoldcoast.co.uk">hello@tasteofgoldcoast.co.uk</a></p>
+  <p style="margin-top:2rem;font-size:.7rem;opacity:.6;">© 2026 Taste of Gold Coast. All rights reserved.</p>
+</footer>
+
+<!-- ─── SUCCESS MODAL ─── -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-icon">🎉</div>
+    <div class="modal-title">You're on the list!</div>
+    <p class="modal-body">
+      Thank you for reserving your spot at <strong>Taste of Gold Coast</strong>.<br>
+      A confirmation email is on its way to you.<br><br>
+      We can't wait to celebrate with you on 27 June!<br><br>
+      <small style="font-size:.8rem;color:var(--muted-lt);">
+        Your £2.50 counts as credit for your first drink or snack on the day.
+      </small>
+    </p>
+  </div>
+</div>
+
+<script>
+  // ── Sticky nav ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () =>
+    nav.classList.toggle('solid', scrollY > 60), { passive:true });
+
+  // ── Smooth scroll ──
+  document.querySelectorAll('a[href^="#"]').forEach(a =>
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
+    })
+  );
+
+  // ── Menu tabs ──
+  document.querySelectorAll('.tab-btn').forEach(btn =>
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn, .tab-panel')
+        .forEach(el => el.classList.remove('on'));
+      btn.classList.add('on');
+      const panel = document.getElementById('tab-' + btn.dataset.tab);
+      if (panel) panel.classList.add('on');
+    })
+  );
+
+  // ── RSVP dynamic total ──
+  const PRICE = 2.50;
+
+  function updateTotal() {
+    const guests = parseInt(document.getElementById('guests').value) || 1;
+    const total  = (guests * PRICE).toFixed(2);
+    document.getElementById('guests-summary').textContent = guests + ' guest' + (guests > 1 ? 's' : '') + ' × £2.50';
+    document.getElementById('pay-total').textContent      = '£' + total;
+    document.getElementById('btn-total').textContent      = '£' + total;
+  }
+
+  // ── RSVP submit — calls Netlify function to create locked Stripe session ──
+  async function handleRSVP(e) {
+    e.preventDefault();
+
+    const fname   = document.getElementById('fname').value.trim();
+    const lname   = document.getElementById('lname').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const dietary = document.getElementById('dietary').value.trim();
+    const guests  = parseInt(document.getElementById('guests').value) || 1;
+
+    if (!fname || !lname || !email) {
+      alert('Please fill in your name and email before continuing.');
+      return;
+    }
+
+    const btn = document.getElementById('stripe-btn');
+    btn.textContent = 'Processing…';
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+
+    try {
+      const res = await fetch('/.netlify/functions/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          guests,
+          name:    fname + ' ' + lname,
+          email,
+          phone,
+          dietary,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || 'Something went wrong');
+      }
+    } catch (err) {
+      alert('Payment could not be started: ' + err.message + '. Please try again.');
+      btn.innerHTML = 'Reserve My Spot &amp; Pay <span id="btn-total">£' + (guests * PRICE).toFixed(2) + '</span> →';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    }
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('rsvpForm').reset();
+    updateTotal();
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ── Show success/cancel message from Stripe redirect ──
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === 'true') {
+    document.getElementById('modal').classList.add('open');
+  }
+</script>
+
+</body>
+</html>
